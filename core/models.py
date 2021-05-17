@@ -1,6 +1,6 @@
 from django.db import models
 
-
+# definition of activities
 ACTIVITIES = [
     ('HP', 'Conducting History and Physical'),
     ('PD', 'Prioritizing a Differential Diagnosis'),
@@ -8,6 +8,7 @@ ACTIVITIES = [
     ('PH', 'Doing a Patient Handover'),
     ('PP', 'Performing a Procedure'),
 ]
+# definition of entrustability scores
 ENTRUSTABILITY_SCORES = [
     (1, 'I did it.'),
     (2, 'I talked them through it.'),
@@ -17,6 +18,8 @@ ENTRUSTABILITY_SCORES = [
 dictACT = dict(ACTIVITIES)
 dictENT = dict(ENTRUSTABILITY_SCORES)
 
+
+# Giver model has the char field, name
 class Giver(models.Model):
     name = models.CharField(max_length=255)
 
@@ -24,7 +27,7 @@ class Giver(models.Model):
         return f'{self.name}'
 
 
-
+# Feedback model has the following fields
 class Feedback(models.Model):
     activity = models.CharField(max_length=255, default='HP', choices=ACTIVITIES)
     giver = models.ForeignKey(to=Giver, on_delete=models.CASCADE)
@@ -34,9 +37,6 @@ class Feedback(models.Model):
     done_well = models.TextField()
     needs_improvement = models.TextField()
     feedbackDate = models.DateTimeField()
-
-    # class Meta:
-    #     ordering = ['-date']
 
     def __str__(self):
         return f'The giver ({self.giver}) reported an entrustability score of ({self.entrustability}) for "{dictACT[self.activity]}" on {self.feedbackDate:%m, %d, %Y}.'
