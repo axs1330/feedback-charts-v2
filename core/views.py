@@ -5,7 +5,7 @@ from django.shortcuts import render
 from .models import Feedback, Giver, ENTRUSTABILITY_SCORES, ACTIVITIES
 
 
-# primary vie, calls the html script
+# primary view, calls the html script
 def bootstrap_view(request):
     # no filtering done on initial request
     qs_inputs = filter_request(request, 'None')
@@ -142,6 +142,7 @@ def feedback_chart(request):
     })
 
 
+# primary method for generating the appropriate data for the giver pie chart
 def giver_pie_chart(request):
     # run all filters using config: 'GiverPie'
     qs_inputs = filter_request(request, 'GiverPie')
@@ -160,6 +161,7 @@ def giver_pie_chart(request):
     })
 
 
+# primary method for generating the appropriate data for the activity radar chart
 def activity_radar_chart(request):
     # run all filters using config: 'ActivityRadar'
     qs_inputs = filter_request(request, 'ActivityRadar')
