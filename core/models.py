@@ -24,6 +24,7 @@ class Giver(models.Model):
         return f'{self.name}'
 
 
+
 class Feedback(models.Model):
     activity = models.CharField(max_length=255, default='HP', choices=ACTIVITIES)
     giver = models.ForeignKey(to=Giver, on_delete=models.CASCADE)
